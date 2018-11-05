@@ -7,8 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   PanResponder,
-  Animated,
-  findNodeHandle
+  Animated
 } from "react-native";
 import { BlurView } from 'react-native-blur';
 import PropTypes from "prop-types";
@@ -482,7 +481,7 @@ class ReactNativeModal extends Component {
             style={styles.blurView}
             blurType="dark"
             blurAmount={4}
-            viewRef={findNodeHandle(this.backdropRef)}
+            viewRef={this.backdropRef}
           />
         )}
         <TouchableWithoutFeedback onPress={onBackdropPress}>

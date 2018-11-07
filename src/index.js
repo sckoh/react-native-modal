@@ -408,6 +408,10 @@ class ReactNativeModal extends Component {
     }
   };
 
+  getModalMargin = () => {
+    
+  }
+
   render() {
     const {
       animationIn,
@@ -435,7 +439,7 @@ class ReactNativeModal extends Component {
     const deviceHeight = deviceHeightProp || this.state.deviceHeight;
 
     const computedStyle = [
-      { margin: deviceWidth * 0.05, transform: [{ translateY: 0 }] },
+      { margin: 0, transform: [{ translateY: 0 }] },
       styles.content,
       style
     ];

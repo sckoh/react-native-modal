@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {
   Dimensions,
-  Modal,
+  // Modal,
   DeviceEventEmitter,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
@@ -17,6 +17,7 @@ import {
   registerAnimation,
   createAnimation
 } from "react-native-animatable";
+import Modal from 'react-native-root-modal';
 import * as ANIMATION_DEFINITIONS from "./animations";
 
 import styles from "./index.style.js";
@@ -333,32 +334,35 @@ class ReactNativeModal extends Component {
   open = () => {
     if (this.transitionLock) return;
     this.transitionLock = true;
-    if (this.backdropRef) {
-      this.backdropRef.transitionTo(
-        { opacity: this.props.backdropOpacity },
-        this.props.backdropTransitionInTiming
-      );
-    }
+    
+    setTimeout(() => {
+      if (this.backdropRef) {
+        this.backdropRef.transitionTo(
+          { opacity: this.props.backdropOpacity },
+          this.props.backdropTransitionInTiming
+        );
+      }
 
-    // This is for reset the pan position, if not modal get stuck
-    // at the last release position when you try to open it.
-    // Could certainly be improve - no idea for the moment.
-    if (this.state.isSwipeable) {
-      this.state.pan.setValue({ x: 0, y: 0 });
-    }
+      // This is for reset the pan position, if not modal get stuck
+      // at the last release position when you try to open it.
+      // Could certainly be improve - no idea for the moment.
+      if (this.state.isSwipeable) {
+        this.state.pan.setValue({ x: 0, y: 0 });
+      }
 
-    if (this.contentRef) {
-      this.contentRef[this.animationIn](this.props.animationInTiming).then(
-        () => {
-          this.transitionLock = false;
-          if (!this.props.isVisible) {
-            this.close();
-          } else {
-            this.props.onModalShow();
+      if (this.contentRef) {
+        this.contentRef[this.animationIn](this.props.animationInTiming).then(
+          () => {
+            this.transitionLock = false;
+            if (!this.props.isVisible) {
+              this.close();
+            } else {
+              this.props.onModalShow();
+            }
           }
-        }
-      );
-    }
+        );
+      }
+    })
   };
 
   close = () => {
@@ -439,7 +443,7 @@ class ReactNativeModal extends Component {
     const deviceHeight = deviceHeightProp || this.state.deviceHeight;
 
     const computedStyle = [
-      { margin: 0, transform: [{ translateY: 0 }] },
+      { margin: 0, transform: [{ translateY: deviceHeight }] },
       styles.content,
       style
     ];

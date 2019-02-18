@@ -165,7 +165,7 @@ class ReactNativeModal extends Component {
     );
   }
 
-  UNSAFE_componentWillUnmount() {
+  componentWillUnmount() {
     DeviceEventEmitter.removeListener(
       "didUpdateDimensions",
       this.handleDimensionsUpdate
@@ -439,7 +439,7 @@ class ReactNativeModal extends Component {
       style,
       ...otherProps
     } = this.props;
-    const deviceWidth = deviceHeightProp || this.state.deviceWidth;
+    const deviceWidth = deviceWidthProp || this.state.deviceWidth;
     const deviceHeight = deviceHeightProp || this.state.deviceHeight;
 
     const computedStyle = [

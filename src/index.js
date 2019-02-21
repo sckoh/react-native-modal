@@ -9,7 +9,6 @@ import {
   PanResponder,
   Animated
 } from "react-native";
-import { BlurView } from 'react-native-blur';
 import PropTypes from "prop-types";
 import {
   View,
@@ -41,7 +40,6 @@ class ReactNativeModal extends Component {
     animationOut: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     animationOutTiming: PropTypes.number,
     avoidKeyboard: PropTypes.bool,
-    backdropBlur: PropTypes.bool,
     backdropColor: PropTypes.string,
     backdropOpacity: PropTypes.number,
     backdropTransitionInTiming: PropTypes.number,
@@ -80,7 +78,6 @@ class ReactNativeModal extends Component {
     animationOut: "slideOutDown",
     animationOutTiming: 300,
     avoidKeyboard: false,
-    backdropBlur: false,
     backdropColor: "black",
     backdropOpacity: 0.7,
     backdropTransitionInTiming: 300,
@@ -423,7 +420,6 @@ class ReactNativeModal extends Component {
       animationOut,
       animationOutTiming,
       avoidKeyboard,
-      backdropBlur,
       backdropColor,
       backdropOpacity,
       backdropTransitionInTiming,
@@ -484,14 +480,6 @@ class ReactNativeModal extends Component {
         onRequestClose={onBackButtonPress}
         {...otherProps}
       >
-        {backdropBlur && (
-          <BlurView
-            style={styles.blurView}
-            blurType="dark"
-            blurAmount={4}
-            viewRef={this.backdropRef}
-          />
-        )}
         <TouchableWithoutFeedback onPress={onBackdropPress}>
           <View
             ref={ref => (this.backdropRef = ref)}

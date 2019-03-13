@@ -25,12 +25,16 @@ declare module "react-native-modal" {
     deviceHeight?: number;
     deviceWidth?: number;
     hideModalContentWhileAnimating?: boolean;
+    propagateSwipe?: boolean;
     isVisible: boolean;
     onModalShow?: () => void;
     onModalHide?: () => void;
     onBackButtonPress?: () => void;
     onBackdropPress?: () => void;
-    onSwipe?: () => void;
+    onSwipeStart?: () => void;
+    onSwipeMove?: (percentageShown: number) => void;
+    onSwipeComplete?: () => void;
+    onSwipeCancel?: () => void;
     swipeThreshold?: number;
     style?: StyleProp<ViewStyle>;
     swipeDirection?: "up" | "down" | "left" | "right";
@@ -42,7 +46,11 @@ declare module "react-native-modal" {
     onShow?: () => void;
     hardwareAccelerated?: boolean;
     onOrientationChange?: (orientation: "portrait" | "landscape") => void;
-    presentationStyle?: "fullScreen" | "pageSheet" | "formSheet" | "overFullScreen";
+    presentationStyle?:
+      | "fullScreen"
+      | "pageSheet"
+      | "formSheet"
+      | "overFullScreen";
   }
 
   class Modal extends Component<ModalProps> {}

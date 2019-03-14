@@ -365,8 +365,8 @@ class ReactNativeModal extends Component {
             } else {
               this.props.onModalShow();
             }
-          );
-        }
+          },
+        );
       }
     });
   };
